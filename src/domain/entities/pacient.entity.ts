@@ -10,35 +10,4 @@ export class PacientEntity {
     public fecha: Date | null,
     public veterinario: string
   ) {}
-
-  public static fromObject(object: { [key: string]: any }): PacientEntity {
-    const {
-      id,
-      _id,
-      nombre,
-      telefono,
-      propietario,
-      email,
-      fecha,
-      veterinario,
-    } = object;
-    if (!_id && !id) throw "Id es requerido";
-    if (!nombre) throw "Nombre es requerido";
-    if (!telefono) throw "Telefono es requerido";
-    if (!propietario) throw "Propietario es requerido";
-    if (!email) throw "Email es requerido";
-    if (!fecha) throw "Fecha es requerida";
-    if (!veterinario) throw "Veterinario es requerido";
-    if (!Validators.isMongoId(veterinario)) "Veterinario Invalido";
-
-    return new PacientEntity(
-      _id || id,
-      nombre,
-      telefono,
-      propietario,
-      email,
-      fecha,
-      veterinario
-    );
-  }
 }
