@@ -1,9 +1,9 @@
-import { UpdatePacientDto } from "../../domain/dtos/pacients/update-pacient-dto";
 import {
   CreatePacientDto,
   PacienteDatasource,
   PacientEntity,
   PacienteRepository,
+  UpdatePacientDto,
 } from "../../domain";
 
 export class PacientRepositoryImpl implements PacienteRepository {

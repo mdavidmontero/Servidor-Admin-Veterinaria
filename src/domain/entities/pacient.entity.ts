@@ -1,3 +1,5 @@
+import { Validators } from "../../config";
+
 export class PacientEntity {
   constructor(
     public id: string,
@@ -26,7 +28,8 @@ export class PacientEntity {
     if (!propietario) throw "Propietario es requerido";
     if (!email) throw "Email es requerido";
     if (!fecha) throw "Fecha es requerida";
-    if (!veterinario) "Veterinario es Obligatorio";
+    if (!veterinario) throw "Veterinario es requerido";
+    if (!Validators.isMongoId(veterinario)) "Veterinario Invalido";
 
     return new PacientEntity(
       _id || id,

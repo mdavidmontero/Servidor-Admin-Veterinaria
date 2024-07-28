@@ -28,10 +28,8 @@ const pacientSchema = new mongoose.Schema({
   },
 
   veterinario: {
-    type: String,
-
-    // type: Schema.Types.ObjectId,
-    // ref: "Veterinario",
+    type: Schema.Types.ObjectId,
+    ref: "Veterinario",
   },
 });
 

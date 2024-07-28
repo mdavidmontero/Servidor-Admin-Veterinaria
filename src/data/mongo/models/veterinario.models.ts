@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import bcrypt from "bcrypt";
 import { generarId } from "../../../config";
 
 const veterinarioSchema = new mongoose.Schema({

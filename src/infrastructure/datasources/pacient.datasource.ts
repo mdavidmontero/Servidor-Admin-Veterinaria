@@ -1,4 +1,5 @@
 import { PacienteModel } from "../../data";
+import { VeterinarioModel } from "../../data/mongo/models/veterinario.models";
 import {
   CreatePacientDto,
   PacienteDatasource,
@@ -13,7 +14,6 @@ export class PacientDataSourceImpl implements PacienteDatasource {
   }
   async findById(id: string): Promise<PacientEntity> {
     const pacient = await PacienteModel.findById(id);
-    console.log(pacient);
     if (!pacient) throw `Paciente with id ${id} not found`;
     return PacientEntity.fromObject(pacient);
   }
@@ -36,6 +36,14 @@ export class PacientDataSourceImpl implements PacienteDatasource {
   }
   async create(createPacientDto: CreatePacientDto): Promise<PacientEntity> {
     const pacient = new PacienteModel(createPacientDto);
+    const buscarPaciente = await PacienteModel.findOne({
+      email: createPacientDto.email,
+    });
+    if (buscarPaciente?.email) throw "Email ya existe";
+    const veterinario = await VeterinarioModel.findById(
+      createPacientDto.veterinario
+    );
+    if (!veterinario) throw "Veterinario no existe";
     await pacient.save();
     return PacientEntity.fromObject(pacient);
   }
