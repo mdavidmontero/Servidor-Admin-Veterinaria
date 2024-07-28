@@ -1,4 +1,4 @@
-import { CreatePacientDto, PacientEntity } from "..";
+import { CreatePacientDto, PacientEntity, UpdatePacientDto } from "..";
 
 export abstract class PacienteRepository {
   abstract create(createPacientDto: CreatePacientDto): Promise<PacientEntity>;
@@ -6,7 +6,7 @@ export abstract class PacienteRepository {
   abstract findById(id: string): Promise<PacientEntity>;
   abstract update(
     id: string,
-    updatePacientDto: CreatePacientDto
+    updatePacientDto: UpdatePacientDto
   ): Promise<PacientEntity>;
   abstract delete(id: string): Promise<PacientEntity>;
 }

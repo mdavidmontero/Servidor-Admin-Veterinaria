@@ -3,6 +3,7 @@ import {
   CreatePacientDto,
   PacienteDatasource,
   PacientEntity,
+  UpdatePacientDto,
 } from "../../domain";
 
 export class PacientDataSourceImpl implements PacienteDatasource {
@@ -13,17 +14,25 @@ export class PacientDataSourceImpl implements PacienteDatasource {
   async findById(id: string): Promise<PacientEntity> {
     const pacient = await PacienteModel.findById(id);
     console.log(pacient);
-    if (!pacient) throw `Todo with id ${id} not found`;
+    if (!pacient) throw `Paciente with id ${id} not found`;
     return PacientEntity.fromObject(pacient);
   }
-  update(
+  async update(
     id: string,
-    updatePacientDto: CreatePacientDto
+    updatePacientDto: UpdatePacientDto
   ): Promise<PacientEntity> {
-    throw new Error("Method not implemented.");
+    const paciente = await PacienteModel.findById(id);
+    if (!paciente) throw `Paciente no existe con ese id`;
+    await paciente.updateOne(updatePacientDto);
+    return PacientEntity.fromObject(paciente);
   }
-  delete(id: string): Promise<PacientEntity> {
-    throw new Error("Method not implemented.");
+
+  async delete(id: string): Promise<PacientEntity> {
+    const paciente = await PacienteModel.findById(id);
+    if (!paciente) throw `Paciente no existe con ese id`;
+    const pacientData = PacientEntity.fromObject(paciente);
+    await PacienteModel.deleteOne({ _id: id });
+    return pacientData;
   }
   async create(createPacientDto: CreatePacientDto): Promise<PacientEntity> {
     const pacient = new PacienteModel(createPacientDto);

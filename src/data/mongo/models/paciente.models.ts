@@ -22,6 +22,11 @@ const pacientSchema = new mongoose.Schema({
     required: true,
     default: new Date(),
   },
+  sintomas: {
+    type: String,
+    required: true,
+  },
+
   veterinario: {
     type: String,
 

@@ -15,6 +15,8 @@ export class PacientRoutes {
     router.get("/", pacientController.getPacientes);
     router.get("/:id", pacientController.getPaciente);
     router.post("/", pacientController.createPacient);
+    router.put("/:id", pacientController.updatePaciente);
+    router.delete("/:id", pacientController.deletePaciente);
     return router;
   }
 }

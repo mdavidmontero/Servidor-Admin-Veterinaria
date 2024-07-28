@@ -1,3 +1,4 @@
+import { UpdatePacientDto } from "../../domain/dtos/pacients/update-pacient-dto";
 import {
   CreatePacientDto,
   PacienteDatasource,
@@ -15,12 +16,12 @@ export class PacientRepositoryImpl implements PacienteRepository {
   }
   update(
     id: string,
-    updatePacientDto: CreatePacientDto
+    updatePacientDto: UpdatePacientDto
   ): Promise<PacientEntity> {
-    throw new Error("Method not implemented.");
+    return this.datasource.update(id, updatePacientDto);
   }
   delete(id: string): Promise<PacientEntity> {
-    throw new Error("Method not implemented.");
+    return this.datasource.delete(id);
   }
 
   create(createPacientDto: CreatePacientDto): Promise<PacientEntity> {
